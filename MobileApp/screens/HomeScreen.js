@@ -1,15 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import io from 'socket.io-client';
 
 //sets cuurrent state and current value of user entry
 export default function HomeScreen() {
     const [messageToSend, setMessageToSend] = useState('');
+    const socket = useRef(null);
   //allows to connect to app in browser at http address below
-  useEffect(function(){
+  useEffect(() => {
     // io("http://192.168.0.165:19006/");
-    io("http://127.0.0.1:3001/");
+    socket.current = io("http://127.0.0.1:3001/");
   },[]);
+
+  const sendMessage = () => {
+    socket.current.emit('message', messageToSend);
+  }
 
   return (
     <View style={styles.container}>
@@ -17,7 +22,8 @@ export default function HomeScreen() {
       <TextInput 
           value={messageToSend} onChangeText={
           (text) => setMessageToSend(text)}
-          placeholder="Enter chat message..." />
+          placeholder="Enter chat message..."
+          onSubmitEditing={sendMessage} />
     </View>
   );
 }
