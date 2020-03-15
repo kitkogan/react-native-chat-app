@@ -33,6 +33,7 @@ export default function HomeScreen() {
     <View style={{flex: 1}}>
         {hasJoined ? (
           <GiftedChat
+          renderUsernameOnMessage
           messages={recvMessages}
           onSend={messages => onSend(messages)}
           user={{
