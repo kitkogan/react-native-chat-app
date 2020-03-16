@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Button, TextInput, Image} from 'react-native';
 
+//layout of the join screen that displays when a user first enters the app 
 export default function JoinScreen({joinChat}) {
     const [username, setUsername] = useState('');
     return(

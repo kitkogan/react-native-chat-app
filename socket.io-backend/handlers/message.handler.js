@@ -1,5 +1,8 @@
 let currentMessageId = 1;
 
+//socket listens for the message
+//gets the user id and called the createmessage function
+//broadcats the message
 function handleMessage(socket, users) {
     socket.on('message', messageText => {
         const user = users[socket.id];
@@ -9,6 +12,8 @@ function handleMessage(socket, users) {
     });
 }
 
+//gets the user and messageText from the message handler
+//returns the messager and user information
 function createMessage(user, messageText) {
     return {
         _id: currentMessageId++, 
